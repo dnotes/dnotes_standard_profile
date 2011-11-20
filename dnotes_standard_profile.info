@@ -1,0 +1,45 @@
+; $Id$
+name = DNotes standard profile
+description = Standard Drupal profile for sites by <a href="http://dnotes.net">DNotes.net</a>
+core = 7.x
+
+; Standard profile
+dependencies[] = block
+dependencies[] = color
+dependencies[] = contextual
+dependencies[] = dashboard
+dependencies[] = help
+dependencies[] = image
+dependencies[] = list
+dependencies[] = menu
+dependencies[] = number
+dependencies[] = options
+dependencies[] = path
+dependencies[] = taxonomy
+dependencies[] = search
+dependencies[] = overlay
+dependencies[] = field_ui
+dependencies[] = file
+dependencies[] = rdf
+dependencies[] = syslog
+
+; Extras for Dnotes profile
+dependencies[] = admin_menu_toolbar
+  ; admin_menu
+dependencies[] = libraries
+dependencies[] = views_ui
+  ; views, ctools
+dependencies[] = media_internet
+  ; media, entity
+dependencies[] = dnotes_wysiwyg
+  ; markdown, filter, wysiwyg
+dependencies[] = dnotes_content_display
+  ; nodeformcols, image, colorbox
+dependencies[] = backup_migrate
+dependencies[] = pathauto
+  ; token
+dependencies[] = redirect
+dependencies[] = diff
+
+files[] = dnotes_standard_profile.profile
+

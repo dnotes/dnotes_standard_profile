@@ -38,8 +38,11 @@ dependencies[] = dnotes_content_display
 dependencies[] = backup_migrate
 dependencies[] = pathauto
   ; token
+dependencies[] = transliteration
 dependencies[] = redirect
 dependencies[] = diff
+dependencies[] = robotstxt
+dependencies[] = l10n_update
 
 files[] = dnotes_standard_profile.profile
 

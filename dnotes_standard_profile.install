@@ -6,62 +6,6 @@
  * Perform actions to set up the site for this profile.
  */
 function dnotes_standard_profile_install() {
-  // Add text formats.
-  $filtered_html_format = array(
-    'format' => 'filtered_html',
-    'name' => 'Filtered HTML',
-    'weight' => 0,
-    'filters' => array(
-      // URL filter.
-      'filter_url' => array(
-        'weight' => 0,
-        'status' => 1,
-      ),
-      // HTML filter.
-      'filter_html' => array(
-        'weight' => 1,
-        'status' => 1,
-      ),
-      // Line break filter.
-      'filter_autop' => array(
-        'weight' => 2,
-        'status' => 1,
-      ),
-      // HTML corrector filter.
-      'filter_htmlcorrector' => array(
-        'weight' => 10,
-        'status' => 1,
-      ),
-    ),
-  );
-  $filtered_html_format = (object) $filtered_html_format;
-  filter_format_save($filtered_html_format);
-
-  $full_html_format = array(
-    'format' => 'full_html',
-    'name' => 'Full HTML',
-    'weight' => 1,
-    'filters' => array(
-      // URL filter.
-      'filter_url' => array(
-        'weight' => 0,
-        'status' => 1,
-      ),
-      // Line break filter.
-      'filter_autop' => array(
-        'weight' => 1,
-        'status' => 1,
-      ),
-      // HTML corrector filter.
-      'filter_htmlcorrector' => array(
-        'weight' => 10,
-        'status' => 1,
-      ),
-    ),
-  );
-  $full_html_format = (object) $full_html_format;
-  filter_format_save($full_html_format);
-
   // Enable some standard blocks.
   $default_theme = variable_get('theme_default', 'bartik');
   $admin_theme = 'seven';
@@ -82,7 +26,7 @@ function dnotes_standard_profile_install() {
       'theme' => $default_theme,
       'status' => 1,
       'weight' => -1,
-      'region' => 'sidebar_first',
+      'region' => 'sidebar_second',
       'pages' => '',
       'cache' => -1,
     ),
@@ -93,36 +37,6 @@ function dnotes_standard_profile_install() {
       'status' => 1,
       'weight' => 10,
       'region' => 'dashboard_main',
-      'pages' => '',
-      'cache' => -1,
-    ),
-    array(
-      'module' => 'user',
-      'delta' => 'login',
-      'theme' => $default_theme,
-      'status' => 1,
-      'weight' => 0,
-      'region' => 'sidebar_first',
-      'pages' => '',
-      'cache' => -1,
-    ),
-    array(
-      'module' => 'system',
-      'delta' => 'navigation',
-      'theme' => $default_theme,
-      'status' => 1,
-      'weight' => 0,
-      'region' => 'sidebar_first',
-      'pages' => '',
-      'cache' => -1,
-    ),
-    array(
-      'module' => 'system',
-      'delta' => 'powered-by',
-      'theme' => $default_theme,
-      'status' => 1,
-      'weight' => 10,
-      'region' => 'footer',
       'pages' => '',
       'cache' => -1,
     ),
@@ -153,16 +67,6 @@ function dnotes_standard_profile_install() {
       'status' => 1,
       'weight' => 0,
       'region' => 'help',
-      'pages' => '',
-      'cache' => -1,
-    ),
-    array(
-      'module' => 'user',
-      'delta' => 'login',
-      'theme' => $admin_theme,
-      'status' => 1,
-      'weight' => 10,
-      'region' => 'content',
       'pages' => '',
       'cache' => -1,
     ),
@@ -387,18 +291,89 @@ function dnotes_standard_profile_install() {
   field_create_instance($instance);
 
   // Enable default permissions for system roles.
-  $filtered_html_permission = filter_permission_name($filtered_html_format);
-  user_role_grant_permissions(DRUPAL_ANONYMOUS_RID, array('access content', 'access comments', $filtered_html_permission));
-  user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array('access content', 'access comments', 'post comments', 'skip comment approval', $filtered_html_permission));
+  $filtered_html_permission = filter_permission_name(filter_format_load('filtered_html'));
+  $full_html_permission = filter_permission_name(filter_format_load('full_html'));
+  user_role_grant_permissions(DRUPAL_ANONYMOUS_RID, array(
+    'access content',
+    $filtered_html_permission,
+    'access site-wide contact form',
+    'access user contact forms',
+    'view media',
+    'search content',
+    'access user profiles',
+  ));
+  user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array(
+    'access content',
+    $filtered_html_permission,
+    'access site-wide contact form',
+    'access user contact forms',
+    'view media',
+    'search content',
+    'access user profiles',
+    'add media from remote sources',
+    'view own unpublished content',
+    'access overlay',
+    'use advanced search',
+    'cancel account',
+  ));
 
   // Create a default role for site administrators, with all available permissions assigned.
   $admin_role = new stdClass();
   $admin_role->name = 'administrator';
-  $admin_role->weight = 2;
+  $admin_role->weight = 10;
   user_role_save($admin_role);
   user_role_grant_permissions($admin_role->rid, array_keys(module_invoke_all('permission')));
   // Set this as the administrator role.
   variable_set('user_admin_role', $admin_role->rid);
+
+  // Create an editor role
+  $editor = new stdClass();
+  $editor->name = 'editor';
+  $editor->weight = 5;
+  user_role_save($editor);
+  user_role_grant_permissions($editor->rid, array(
+    'administer nodes',
+    'access administration menu',
+    'flush caches',
+    'administer blocks',
+    'access contextual links',
+    'access dashboard',
+    $full_html_permission,
+    'administer media',
+    'import media',
+    'view revisions',
+    'revert revisions',
+    'delete revisions',
+    'administer url aliases',
+    'create url alaises',
+    'administer redirects',
+    'administer search',
+    'access administration pages',
+    'access site in maintenance mode',
+    'view the administration theme',
+    'access all views',
+    'administer robots.txt',
+  ));
+
+  // Create a user manager role
+  $manager = new stdClass();
+  $manager->name = 'user manager';
+  $manager->weight = 6;
+  user_role_save($manager);
+  user_role_grant_permissions($manager->rid, array(
+    'access administration menu',
+    'access contextual links',
+    'access dashboard',
+    $full_html_permission,
+    'access administration pages',
+    'access site in maintenance mode',
+    'view the administration theme',
+    'access all views',
+    'access site reports',
+    'block IP addresses',
+    'administer permissions',
+    'administer users',
+  ));
 
   // Assign user 1 the "administrator" role.
   db_insert('users_roles')

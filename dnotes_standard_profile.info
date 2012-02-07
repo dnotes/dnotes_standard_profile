@@ -28,13 +28,13 @@ dependencies[] = syslog
 
 
 ; Other useful modules
-dependencies[] = token ; ctools
+dependencies[] = token
 dependencies[] = transliteration
 dependencies[] = pathauto
 dependencies[] = redirect
 dependencies[] = diff
-dependencies[] = views_ui ; views
-dependencies[] = admin_menu_toolbar ; admin_menu
+dependencies[] = views_ui
+dependencies[] = admin_menu_toolbar
 dependencies[] = colorbox
 dependencies[] = libraries
 dependencies[] = robotstxt

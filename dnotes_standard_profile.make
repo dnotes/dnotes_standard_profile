@@ -15,6 +15,7 @@ projects[] = libraries
 projects[] = diff
 projects[] = views
 projects[] = robotstxt
+projects[] = backup_migrate
 
 ; Wysiwyg / Media
 ; =============================

@@ -37,7 +37,7 @@ dependencies[] = views_ui
 dependencies[] = admin_menu_toolbar
 dependencies[] = colorbox
 dependencies[] = libraries
-dependencies[] = robotstxt
+;dependencies[] = robotstxt (there is a bug that prevents us from using this with Aegir)
 dependencies[] = backup_migrate
 
 

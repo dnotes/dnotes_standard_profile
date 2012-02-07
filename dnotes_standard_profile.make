@@ -24,6 +24,11 @@ projects[] = media_youtube
 projects[] = mediaelement
 projects[] = file_entity
 projects[] = colorbox
+projects[dnotes_wysiwyg][type] = "module"
+projects[dnotes_wysiwyg][download][type] = "git"
+projects[dnotes_wysiwyg][download][url] = "http://github.com/dnotes/dnotes_wysiwyg.git"
+projects[dnotes_wysiwyg][download][branch] = "7.x-1.x"
+projects[dnotes_wysiwyg][directory_name] = "dnotes_wysiwyg"
 
 ; Multilingual
 ; =============================

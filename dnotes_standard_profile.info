@@ -1,11 +1,11 @@
-; $Id$
-name = DNotes standard profile
-description = Standard Drupal profile for sites by <a href="http://dnotes.net">DNotes.net</a>
+name = DNotes Standard
+description = A standard install profile from DNotes Media Productions
 core = 7.x
 
-; Standard profile
+; Modules from standard.info
 dependencies[] = block
 dependencies[] = color
+dependencies[] = comment
 dependencies[] = contextual
 dependencies[] = dashboard
 dependencies[] = help
@@ -16,33 +16,30 @@ dependencies[] = number
 dependencies[] = options
 dependencies[] = path
 dependencies[] = taxonomy
+;dependencies[] = dblog (performance hit.)
 dependencies[] = search
+dependencies[] = shortcut
+;dependencies[] = toolbar (using admin_menu instead.)
 dependencies[] = overlay
 dependencies[] = field_ui
 dependencies[] = file
 dependencies[] = rdf
 dependencies[] = syslog
 
-; Extras for Dnotes profile
-dependencies[] = admin_menu_toolbar
-  ; admin_menu
-dependencies[] = libraries
-dependencies[] = views_ui
-  ; views, ctools
-dependencies[] = media_internet
-  ; media, entity
-dependencies[] = dnotes_wysiwyg
-  ; markdown, filter, wysiwyg
-dependencies[] = dnotes_content_display
-  ; nodeformcols, image, colorbox
-dependencies[] = backup_migrate
-dependencies[] = pathauto
-  ; token
+
+; Other useful modules
+dependencies[] = token ; ctools
 dependencies[] = transliteration
+dependencies[] = pathauto
 dependencies[] = redirect
 dependencies[] = diff
+dependencies[] = views_ui ; views
+dependencies[] = admin_menu_toolbar ; admin_menu
+dependencies[] = colorbox
+dependencies[] = libraries
 dependencies[] = robotstxt
-dependencies[] = l10n_update
+dependencies[] = backup_migrate
 
+
+; Files included with profile
 files[] = dnotes_standard_profile.profile
-

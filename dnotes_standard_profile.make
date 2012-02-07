@@ -3,19 +3,30 @@
 core = 7.x
 api = 2
 
+; Essentials
+; =============================
 projects[] = ctools
-
 projects[] = token
 projects[] = pathauto
 projects[] = transliteration
 projects[] = redirect
 projects[] = admin_menu
-projects[] = masquerade
-projects[] = sudo
-projects[] = css_injector
-projects[nodeformcols] = 1.x-dev
 projects[] = libraries
+projects[] = diff
+projects[] = views
+projects[] = robotstxt
 
+; Wysiwyg / Media
+; =============================
+projects[] = wysiwyg
+projects[] = media
+projects[] = media_youtube
+projects[] = mediaelement
+projects[] = file_entity
+projects[] = colorbox
+
+; Multilingual
+; =============================
 projects[] = l10n_update
 projects[] = languageicons
 projects[] = potx
@@ -25,37 +36,44 @@ projects[] = variable
 projects[] = translation_overview
 projects[] = translation_table
 
-projects[] = diff
-
-projects[] = taxonomy_menu
-
+; Workflow
+; =============================
 projects[] = workbench
 projects[] = workbench_access
 projects[] = workbench_moderation
 
+; Fields
+; =============================
 projects[] = references
 projects[] = field_group
 projects[] = filefield_sources
 
-projects[] = media
-projects[] = media_youtube
-projects[media_vimeo] = 1.0-beta3
-projects[] = mediaelement
-projects[] = file_entity
-projects[] = colorbox
+; Date / Calendar
+; =============================
+projects[] = date
+projects[] = date_repeat_instance
+projects[] = fullcalendar
+projects[] = colors
+projects[] = views_date_format_sql
 
-projects[views] = 3.0-rc1
-projects[] = realname
-projects[] = wysiwyg
+; Miscellaneous
+; =============================
+;projects[nodeformcols] = 1.x-dev                                               ; TODO: official release
 projects[] = webform
 projects[] = flag
-projects[] = fivestar
 projects[] = votingapi
+projects[] = fivestar
 projects[] = views_slideshow
 projects[] = typogrify
 projects[] = markdown
+projects[] = masquerade
+projects[] = sudo
+projects[] = css_injector
+projects[] = taxonomy_menu
+projects[] = realname
 
 ; Themes
+
 projects[] = omega
 
 ; Libraries
@@ -67,6 +85,9 @@ libraries[ckeditor][directory_name] = "ckeditor"
 libraries[colorbox][download][type] = "file"
 libraries[colorbox][download][url] = "http://jacklmoore.com/colorbox/colorbox.zip"
 libraries[colorbox][directory_name] = "colorbox"
+
+libraries[fullcalendar][download][type] = "file"
+libraries[fullcalendar][download][url] = "http://arshaw.com/fullcalendar/downloads/fullcalendar-1.5.2.zip"
 
 libraries[mediaelement][download][type] = "zip"
 libraries[mediaelement][download][url] = "https://github.com/johndyer/mediaelement/zipball/master"

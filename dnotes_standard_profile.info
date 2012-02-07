@@ -24,6 +24,7 @@ dependencies[] = overlay
 dependencies[] = field_ui
 dependencies[] = file
 dependencies[] = rdf
+
 dependencies[] = syslog
 
 
@@ -37,8 +38,10 @@ dependencies[] = views_ui
 dependencies[] = admin_menu_toolbar
 dependencies[] = colorbox
 dependencies[] = libraries
-;dependencies[] = robotstxt (there is a bug that prevents us from using this with Aegir)
+dependencies[] = robotstxt
 dependencies[] = backup_migrate
+dependencies[] = media
+dependencies[] = wysiwyg
 
 
 ; Files included with profile
